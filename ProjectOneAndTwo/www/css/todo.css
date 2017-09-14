@@ -1,0 +1,9 @@
+
+/* This is used to place a line through items as they are completed hence the 'line-through' decoration and
+   to also grey the item out hence setting the color to grey. */
+.done-true {
+    text-decoration: line-through;
+    color: grey;
+    text-align: left;
+}
+

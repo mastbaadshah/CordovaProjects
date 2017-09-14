@@ -1,0 +1,52 @@
+﻿<html ng-app="todoApp">
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">        
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <script src="scripts/angular.min.js"></script>
+        <script src="scripts/todo.js"></script>
+        <link rel="stylesheet" href="css/todo.css">
+        <title>AngularCordova</title>
+    </head>
+    <body>
+        <div style="padding: 15px 10px 10px 10px">
+            <div id="deviceready">
+                <p class="event listening"></p>
+                <p class="event received"></p>
+
+                <h2>Todo</h2>
+                <div ng-controller="TodoListController as todoList">
+                    <br />
+                    <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining{"Attachments":[{"__type":"ItemIdAttachment:#Exchange","ItemId":{"ChangeKey":"CQAAABYAAAC/jnd//5PSRKnQ6PcampJ2AAAnzJHi","Id":"AQMkADAwATExADhmOC0yZGY4LWJjMmYtMDACLTAwCgBGAAADp0nBI89R5EqGFeJ3Fzv77AcAt6QpiS6AMEep8hAe/i/rFQAAAgEMAAAAv453f/+T0kSp0Oj3GpqSdgAAACfJ1AYAAAA="},"Name":"Payslips","IsInline":false,"Size":142738}]}</span>
+                    <br /><br />
+                    [ <a href="" ng-click="todoList.setIncompleteFilter()">Unfinished</a> ]
+                    [ <a href="" ng-click="todoList.setCompleteFilter()">Finished</a> ]
+                    [ <a href="" ng-click="todoList.archive()">Clear Finished</a> ]
+                    [ <a href="" ng-click="todoList.clearAll()">Clear All</a> ]
+                    <br /><br />
+                    <div ng-show="doneFilter">Showing complete</div>
+                    <div ng-show="!doneFilter">Showing incomplete</div>
+                    <table>
+                        <tr ng-repeat="todo in todoList.todos | filter: { done: doneFilter } track by $index">
+                            <td><input type="checkbox" ng-model="todo.done"></td>
+                            <td><a href="#"><img src="images/Email.jpg" ng-click="doMessage('Email', todo.id)" /></a></td>
+                            <td><a href="#"><img src="images/Photo.jpg" ng-click="doMessage('Photo', todo.id)" /></a></td>
+                            <td style="padding-left: 5px;"><h1><span class="done-{{todo.done}}">{{todo.text}}</span></h1></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <form ng-submit="todoList.addTodo()">
+                        <input type="text" ng-model="todoList.todoText" size="30" placeholder="add new todo here">
+                        <input class="btn-primary" type="submit" value="add" ng-disabled="todoList.todoText.length < 1 || todoList.todoText == 'add new todo here'">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+        <script type="text/javascript" src="scripts/index.js"></script>
+    </body>
+</html>
